@@ -48,7 +48,7 @@ jobs:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
-        source: ".next"
+        source: ".next/*"
         target: "/root/project/blog-web"
 
     - name: Deploy via SSH
