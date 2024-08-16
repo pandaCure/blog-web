@@ -43,13 +43,15 @@ jobs:
         path: .next
 
     - name: Transfer files via SSH
-      uses: appleboy/scp-action@v0.1.4
+      uses: appleboy/scp-action@v0.1.7
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
-        source: ".next/*"
+        source: ".next/*.*"
         target: "/root/project/blog-web"
+        rm: false
+
 
     - name: Deploy via SSH
       uses: appleboy/ssh-action@v0.1.7
@@ -58,11 +60,11 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          export NVM_DIR=~/.nvm
-          source ~/.nvm/nvm.sh
+          # export NVM_DIR=~/.nvm
+          # source ~/.nvm/nvm.sh
           cd /root/project/blog-web
-          ls
-          npm config set registry https://registry.npmmirror.com
-          npm install -g pnpm
-          pnpm install --registry=https://registry.npmmirror.com
-          pnpm run start
+          ls -al
+          # npm config set registry https://registry.npmmirror.com
+          # npm install -g pnpm
+          # pnpm install --registry=https://registry.npmmirror.com
+          # pnpm run start
