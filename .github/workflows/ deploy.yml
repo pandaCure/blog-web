@@ -48,7 +48,7 @@ jobs:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
-        source: "./*.*"
+        source: "./"
         target: "/root/project/blog-web"
         rm: false
 
@@ -62,6 +62,8 @@ jobs:
         script: |
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
-          cd /root/project/blog-web/.next
+          cd /root/project/blog-web/
           pnpm install --registry=https://registry.npmmirror.com
           pm2 start npm --name "blog-web" -- start -- --port 6666
+          pm2 startup
+          pm2 save
