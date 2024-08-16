@@ -60,11 +60,10 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          # export NVM_DIR=~/.nvm
-          # source ~/.nvm/nvm.sh
-          cd /root/project/blog-web
-          ls -al
-          # npm config set registry https://registry.npmmirror.com
-          # npm install -g pnpm
-          # pnpm install --registry=https://registry.npmmirror.com
-          # pnpm run start
+          export NVM_DIR=~/.nvm
+          source ~/.nvm/nvm.sh
+          cd /root/project/blog-web/.next
+          npm config set registry https://registry.npmmirror.com
+          npm install -g pnpm pm2
+          pnpm install --registry=https://registry.npmmirror.com
+          pm2 start
