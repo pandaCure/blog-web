@@ -1,0 +1,63 @@
+name: Deploy Next.js App
+
+on:
+  push:
+    branches:
+      - main  # 在 main 分支推送代码时触发
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm config set registry https://registry.npmmirror.com
+
+    - name: Install dependencies
+      run: npm install -g pnpm
+
+    - name: Install dependencies
+      run: pnpm install --registry=https://registry.npmmirror.com
+
+    - name: Build Next.js app
+      run: pnpm run build
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: nextjs-build
+        path: .next
+
+    - name: Download build artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: nextjs-build
+        path: .next
+
+    - name: Transfer files via SSH
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        source: ".next"
+        target: "/root/project/web-blog"
+
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          cd /root/project/web-blog
+          pnpm install --registry=https://registry.npmmirror.com
+          pnpm run start
