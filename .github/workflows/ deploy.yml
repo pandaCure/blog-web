@@ -63,6 +63,6 @@ jobs:
           source ~/.nvm/nvm.sh
           cd /root/project/blog-web/
           pnpm install --registry=https://registry.npmmirror.com
-          pm2 start npm --name "blog-web" -- start -- --port 6666
+          pm2 start npm --name "blog-web" -- start -- --port 9898
           pm2 startup
           pm2 save
