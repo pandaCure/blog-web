@@ -50,7 +50,6 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         source: "./"
         target: "/root/project/blog-web"
-        rm: false
 
 
     - name: Deploy via SSH
