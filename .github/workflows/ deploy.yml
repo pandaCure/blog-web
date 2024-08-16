@@ -58,6 +58,8 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         script: |
+          export NVM_DIR=~/.nvm
+          source ~/.nvm/nvm.sh
           cd /root/project/blog-web
           npm config set registry https://registry.npmmirror.com
           npm install -g pnpm
