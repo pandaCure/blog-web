@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import beianLogo from "@/asserts/beian/beian-logo.png";
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -108,6 +108,21 @@ export default function Home() {
           </p>
         </a>
       </div>
+      <footer className="flex justify-between">
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
+          京ICP备2023020098号-1
+        </a>
+        <div className="flex ml-6">
+          <Image src={beianLogo}  alt="beian" className="object-cover mr-2"/>
+          <a
+            target="_blank"
+            rel="noopener"
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011402054310"
+          >
+            京公网安备11011402054310号
+          </a>
+        </div>
+      </footer>
     </main>
   );
 }
