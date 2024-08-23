@@ -64,5 +64,6 @@ jobs:
           cd /root/project/blog-web/
           pnpm install --registry=https://registry.npmmirror.com
           pm2 startOrRestart npm --name "blog-web" -- start -- --port 9898
+          pm2 restart all
           pm2 startup
           pm2 save

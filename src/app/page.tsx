@@ -10,7 +10,7 @@ export default function Home() {
         <div className="w-10 h-10 overflow-hidden rounded-full cursor-pointer hover:animate-spin">
           <Image src={logo} alt="logo" className="h-full w-10"/>
         </div>
-        <div className={clsx("ml-2", loveFont.className)}>钟繇 - zhongyao</div>
+        <div className={clsx("ml-2", loveFont.className)} style={loveFont.style}>钟繇 - zhongyao</div>
       </nav>
       <main>
         <figure className="w-screen h-screen bg-fixed bg-no-repeat bg-cover bg-center bg-[url('https://www.todaybing.com/api/today/cn?size=hd')] after:bg-[url('/website/dot.png')] after:opacity-50 after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-repeat relative"></figure>
